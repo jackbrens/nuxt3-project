@@ -2,6 +2,7 @@
 	<div>
 		<NuxtWelcome />
 		{{ title }}
+		你没事吧
 	</div>
 </template>
 
