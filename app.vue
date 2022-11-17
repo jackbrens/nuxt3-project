@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+	<div>
+		<NuxtWelcome />
+		{{ title }}
+	</div>
 </template>
 
 <script setup>
