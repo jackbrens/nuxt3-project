@@ -8,8 +8,7 @@
 		"postinstall": "nuxt prepare",
 		"lint": "eslint --ext .js,.ts,.vue .",
 		"prepare": "husky install",
-		"lint:lint-staged": "lint-staged",
-		"commit": "git-cz"
+		"lint:lint-staged": "lint-staged"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.2.0",
@@ -25,5 +24,10 @@
 		"lint-staged": "^13.0.3",
 		"nuxt": "3.0.0-rc.13",
 		"prettier": "^2.7.1"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-git"
+		}
 	}
 }
