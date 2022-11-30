@@ -23,7 +23,8 @@
 		"husky": "^8.0.2",
 		"lint-staged": "^13.0.3",
 		"nuxt": "3.0.0-rc.13",
-		"prettier": "^2.7.1"
+		"prettier": "^2.7.1",
+		"sass": "^1.56.1"
 	},
 	"config": {
 		"commitizen": {
