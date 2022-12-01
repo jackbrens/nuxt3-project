@@ -6,6 +6,7 @@ module.exports = {
 	extends: ['@nuxtjs', 'plugin:vue/vue3-recommended', 'prettier'],
 	parserOptions: {
 		ecmaVersion: 13,
+		parser: '@typescript-eslint/parser',
 		sourceType: 'module',
 	},
 	plugins: ['prettier'],
