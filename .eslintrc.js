@@ -18,5 +18,9 @@ module.exports = {
 		// 单引号
 		quotes: 2,
 		'no-var': 2,
+		// 强制数组方括号中使用一致的空格
+		'array-bracket-spacing': 2,
+		// 强制对象中使用一致的空格
+		'object-curly-spacing': 2,
 	},
 }

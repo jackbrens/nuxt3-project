@@ -1,14 +1,10 @@
 > 大家好啊，本篇文章是我逐渐摸索（踩了一些坑）得到 `nuxt3` 使用的心得体会，希望能帮助到大家，文章只讲搭建过程，不讲原理，写得不好还请见谅哈。不多说，开搞吧 :facepunch:
 
-
-
 ## 搭建前提
 
 1. `node` 版本：`16.16.0`
 2. `yarn` 版本：`1.22.18`
-3. 搭配 [nuxt3中文文档](https://www.nuxtjs.org.cn/) 食用效果更好哦
-
-
+3. 搭配 [nuxt3 中文文档](https://www.nuxtjs.org.cn/) 食用效果更好哦
 
 ## 创建项目
 
@@ -18,9 +14,9 @@
 npx nuxi init nuxt3-project
 ```
 
-> 我的node版本：16.16.0
+> 我的 node 版本：16.16.0
 >
-> 提示： node版本最好要高于 `14.16.0`，否则会报错
+> 提示： node 版本最好要高于 `14.16.0`，否则会报错
 >
 > **再次提示：项目路径不能含有中文，否则会出现下面的错误，换到英文路径下，即可解决！！！**
 >
@@ -43,9 +39,7 @@ yarn dev
 
 ![image-20221116174332212](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221116174332212.png)
 
-
-
-## ESLint + Prettier + EditorConfig  环境配置
+## ESLint + Prettier + EditorConfig 环境配置
 
 ### 安装 Vscode 插件（ESLint）：
 
@@ -62,29 +56,25 @@ yarn add eslint @nuxtjs/eslint-config eslint-plugin-vue -D
 > 1. **@nuxtjs/eslint-config**: 对应 [@nuxtjs/eslint-config](https://www.npmjs.com/package/@nuxtjs/eslint-config) 套件，由 Nuxt 官方提供用于 Nuxt 的 ESLint 规则配置。如果你是使用 TypeScript 则换成 [@nuxtjs/eslint-config-typescript](https://www.npmjs.com/package/@nuxtjs/eslint-config-typescript)。
 > 2. **plugin:vue/vue3-recommended**: 对应 [eslint-plugin-vue](https://www.npmjs.com/package/eslint-plugin-vue) 套件，由 Vue.js 官方提供的 ESLint [插件](https://github.com/vuejs/eslint-plugin-vue)，包含了能配合 Vue SFC 语法及特性的规则，也可以参考 [官方文件](https://eslint.vuejs.org/user-guide/#bundle-configurations)，依据需求稍作调整。
 
-
-
 ### 根目录下新建 .eslintrc.js
 
 ```js
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true
-  },
-  extends: ['@nuxtjs', 'plugin:vue/vue3-recommended'],
-  parserOptions: {
-    ecmaVersion: 13,
-    sourceType: 'module'
-  },
-  plugins: [],
-  rules: {
-    'no-undef': 'off'
-  }
+	env: {
+		browser: true,
+		es2021: true,
+	},
+	extends: ['@nuxtjs', 'plugin:vue/vue3-recommended'],
+	parserOptions: {
+		ecmaVersion: 13,
+		sourceType: 'module',
+	},
+	plugins: [],
+	rules: {
+		'no-undef': 'off',
+	},
 }
 ```
-
-
 
 ### 根目录下新建 .eslintignore
 
@@ -105,17 +95,15 @@ dist
 /bin
 ```
 
+### 用 ESLint 来尝试检查
 
-
-### 用ESLint 来尝试检查
-
-修改一下 `app.vue` 
+修改一下 `app.vue`
 
 ```vue
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+	<div>
+		<NuxtWelcome />
+	</div>
 </template>
 
 <script setup>
@@ -131,13 +119,9 @@ yarn lint
 
 ![image-20221116181755768](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221116181755768.png)
 
-
-
 ### 安装 Vscode 插件（Prettier）：
 
 ![image-20221117110107194](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221117110107194.png)
-
-
 
 ### 安装 Prettier
 
@@ -146,43 +130,39 @@ yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
 ```
 
 > 1. 安装 `eslint-config-prettier` 是为了解决 `ESLint` 中的样式规范和 `Prettier` 中样式规范的 `冲突`，以 `Prettier` 的样式规范 `为准`，使 ESLint 中的样式规范自动失效。
-> 2. 安装 `eslint-plugin-prettier` 是为了将 `Prettier` 的 `rules`  以插件的形式加入到 `ESLint` 里面。
-
-
+> 2. 安装 `eslint-plugin-prettier` 是为了将 `Prettier` 的 `rules` 以插件的形式加入到 `ESLint` 里面。
 
 ### 根目录下新建 .prettierrc.js
 
 ```js
 module.exports = {
-  // 两个缩进
-  tabWidth: 2,
-  // jsx使用单引号
-  jsxSingleQuote: true,
-  // 在jsx中把'>' 是否单独放一行
-  jsxBracketSameLine: true,
-  // 行宽 120 个字符
-  printWidth: 120,
-  // js 使用单引号
-  singleQuote: true,
-  // 换行符统一
-  endOfLine: 'auto',
-  // 分号不要
-  semi: false,
-  // json文件 行宽 200 个字符
-  overrides: [
-    {
-      files: '*.json',
-      options: {
-        printWidth: 200,
-      },
-    },
-  ],
-  // 箭头函数 "always" （默认）在所有情况下都需要参数
-  arrowParens: 'always',
+	// 两个缩进
+	tabWidth: 2,
+	// jsx使用单引号
+	jsxSingleQuote: true,
+	// 在jsx中把'>' 是否单独放一行
+	jsxBracketSameLine: true,
+	// 行宽 120 个字符
+	printWidth: 120,
+	// js 使用单引号
+	singleQuote: true,
+	// 换行符统一
+	endOfLine: 'auto',
+	// 分号不要
+	semi: false,
+	// json文件 行宽 200 个字符
+	overrides: [
+		{
+			files: '*.json',
+			options: {
+				printWidth: 200,
+			},
+		},
+	],
+	// 箭头函数 "always" （默认）在所有情况下都需要参数
+	arrowParens: 'always',
 }
 ```
-
-
 
 ### 根目录下新建 .prettierignore
 
@@ -192,13 +172,9 @@ node_modules
 dist
 ```
 
-
-
 ### 安装 VsCode 插件（EditorConfig ）：
 
 ![image-20221117120634157](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221117120634157.png)
-
-
 
 ### 根目录下新建 .editorconfig
 
@@ -222,8 +198,6 @@ max_line_length = off # 关闭最大行长度限制
 trim_trailing_whitespace = false # 关闭末尾空格修剪
 ```
 
-
-
 ## Git 流程规范配置
 
 项目中执行下面命令， `git` 初始化
@@ -231,8 +205,6 @@ trim_trailing_whitespace = false # 关闭末尾空格修剪
 ```
 git init
 ```
-
-
 
 ### husky 安装
 
@@ -250,15 +222,11 @@ yarn add husky -D
 
 然后执行 `yarn prepare` ，根目录会多出 一个 `.husky` 的文件夹。
 
-
-
 ### lint-staged 安装（本地暂存代码检查工具）
 
 ```
 yarn add lint-staged -D
 ```
-
-
 
 > 添加 ESlint Hook（在.husky 文件夹下添加 pre-commit 文件）
 >
@@ -278,8 +246,6 @@ npx husky add .husky/pre-commit "npm run lint:lint-staged"
 }
 ```
 
-
-
 ### 根目录下新建 lint-staged.config.js
 
 ```js
@@ -293,8 +259,6 @@ module.exports = {
 }
 ```
 
-
-
 ### commitlint 安装
 
 > **commit 信息校验工具，不符合则报错**
@@ -302,8 +266,6 @@ module.exports = {
 ```
 yarn add @commitlint/cli @commitlint/config-conventional -D
 ```
-
-
 
 > 在.husky 文件夹下添加 commit-msg 文件
 >
@@ -313,8 +275,6 @@ yarn add @commitlint/cli @commitlint/config-conventional -D
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 ```
 
-
-
 ### commitizen 安装
 
 > **基于 Node.js 的 git commit 命令行工具，生成标准化的 message**
@@ -323,11 +283,9 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 yarn add commitizen -D
 ```
 
-
-
 ### cz-git 安装
 
->**指定提交文字规范，一款工程性更强，高度自定义，标准输出格式的 commitizen 适配器**
+> **指定提交文字规范，一款工程性更强，高度自定义，标准输出格式的 commitizen 适配器**
 
 ```
 yarn add cz-git -D
@@ -342,8 +300,6 @@ yarn add cz-git -D
   }
 }
 ```
-
-
 
 ### 根目录下新建 commitlint.config.js
 
@@ -527,8 +483,6 @@ module.exports = {
 }
 ```
 
-
-
 在 `package.json` 的 `scripts` 中添加
 
 ```json
@@ -536,8 +490,6 @@ module.exports = {
     "lint:lint-staged": "lint-staged"
 }
 ```
-
-
 
 在终端执行如下命令：
 
@@ -559,17 +511,13 @@ yarn git-cz
 
 ![image-20221117173944985](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221117173944985.png)
 
-
-
 > **这时有人会问了，如果我不想用 `yarn git-cz` 提交代码，而是使用 `git commit` 提交行不行？**
 >
->  **删除 `utils` 文件夹下的 `time.ts` ，然后执行下面的命令，很明显失败了**
+> **删除 `utils` 文件夹下的 `time.ts` ，然后执行下面的命令，很明显失败了**
 
 ![image-20221117180139606](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221117180139606.png)
 
 ![image-20221117180053573](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221117180053573.png)
-
-
 
 > **然后又人问了，如果我不想执行 `commitlint` 里的规则，就想什么校验都不做，直接 `commit` 代码，行不行？**
 >
@@ -579,9 +527,7 @@ yarn git-cz
 
 ![image-20221117181120345](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221117181120345.png)
 
-当然，为了各个成员之间能统一规范，最好还是通过 `commitlint` 的规则提交代码比较好呢🤣
-
-
+当然，为了各个成员之间能统一规范，最好还是通过 `commitlint` 的规则提交代码比较好呢 🤣
 
 ## SCSS 配置
 
@@ -590,8 +536,6 @@ yarn git-cz
 ```
 yarn add sass -D
 ```
-
-
 
 在 `app.vue` 中使用
 
@@ -603,8 +547,6 @@ div {
 }
 </style>
 ```
-
-
 
 ### 配置全局 scss 样式文件
 
@@ -624,19 +566,17 @@ export default defineNuxtConfig({
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: '@use "@/assets/styles/global.scss" as *;'	// 注意文件路径要配成自己的
-				}
-			}
-		}
-	}
+					additionalData: '@use "@/assets/styles/global.scss" as *;', // 注意文件路径要配成自己的
+				},
+			},
+		},
+	},
 })
 ```
 
-
-
 ### 组件中使用
 
-> 不需要任何的引入直接可以使用全局scss定义的变量
+> 不需要任何的引入直接可以使用全局 scss 定义的变量
 
 ```css
 div {
@@ -644,13 +584,9 @@ div {
 }
 ```
 
-
-
 在 `webstrom` 中按住 `Ctrl` 然后鼠标移动到变量上，可以看到变量定义在哪个文件中。
 
 ![image-20221118102017244](https://github.com/jackbrens/img-bad/raw/main/nuxt3-project/image-20221118102017244.png)
-
-
 
 ## Element Plus 配置
 
@@ -660,13 +596,11 @@ div {
 yarn add element-plus @element-plus/icons-vue
 ```
 
-
-
 ### 配置
 
 因为 `element-plus` 属于第三方插件，需要在 `plugins` 目录配置
 
-根目录新建 `plugins` 文件夹，在目录下新建 `element-plus.ts` 文件，（注意：默认必须在 `plugins` 下新建配置文件，这是 **约定**，详情见  [插件 plugins](https://www.nuxtjs.org.cn/directory-structure/plugins.html#%E6%8F%92%E4%BB%B6%E7%9B%AE%E5%BD%95))
+根目录新建 `plugins` 文件夹，在目录下新建 `element-plus.ts` 文件，（注意：默认必须在 `plugins` 下新建配置文件，这是 **约定**，详情见 [插件 plugins](https://www.nuxtjs.org.cn/directory-structure/plugins.html#%E6%8F%92%E4%BB%B6%E7%9B%AE%E5%BD%95))
 
 在 `element-plus.ts` 中配置全局
 
@@ -682,16 +616,14 @@ export default defineNuxtPlugin((nuxtApp) => {
 })
 ```
 
-
-
 ### 组件中使用
 
 ```vue
 <template>
-  <div>
-    <el-button type="primary">Primary</el-button>
-    <el-button :icon="Search" circle />
-  </div>
+	<div>
+		<el-button type="primary">Primary</el-button>
+		<el-button :icon="Search" circle />
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -699,21 +631,7 @@ import { Search } from '@element-plus/icons-vue'
 </script>
 ```
 
-
-
 ## 统一封装请求
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## 约定路由
 
@@ -762,9 +680,7 @@ pages/
 ```vue
 <!-- [id].vue -->
 <template>
-	<div>
-        详情页参数=====>{{ $route.params.id }}
-    </div>
+	<div>详情页参数=====>{{ $route.params.id }}</div>
 </template>
 ```
 
@@ -773,7 +689,7 @@ pages/
 ```vue
 <template>
 	<div>
-         <!-- 路由出口 -->
+		<!-- 路由出口 -->
 		<NuxtPage />
 	</div>
 </template>
@@ -791,20 +707,20 @@ pages/
    <template>
    	<div>
    		<NuxtLink to="/">首页</NuxtLink>
-           <NuxtLink to="/post/123">详情页（固定传参）</NuxtLink>
+   		<NuxtLink to="/post/123">详情页（固定传参）</NuxtLink>
    		<NuxtLink :to="{ name: 'post-id', params: { id } }">详情页（动态传参）</NuxtLink>
    		<NuxtPage />
    	</div>
    </template>
-   
+
    <script lang="ts" setup>
-   	import { ref } from 'vue'
-   
-   	const id = ref<number>(456)
+   import { ref } from 'vue'
+
+   const id = ref<number>(456)
    </script>
    ```
 
-   > 这里指的一提的是，如果你的 `pages` 目录是这样的：
+   > 这里需要注意的是，如果你的 `pages` 目录是这样的：
    >
    > ```diff
    > | pages/
@@ -829,22 +745,20 @@ pages/
    		<NuxtPage />
    	</div>
    </template>
-   
+
    <script lang="ts" setup>
-   	import { ref } from 'vue'
-   	import { useRouter } from 'vue-router'
-   	const router = useRouter()
-   
-   	const id = ref<number>(456)
-       
-       // 跳转到详情页
-   	const toPostDetail = () => {
-   		router.push({ name: 'post-id', params: { id: id.value } })
-   	}
+   import { ref } from 'vue'
+   import { useRouter } from 'vue-router'
+   const router = useRouter()
+
+   const id = ref<number>(456)
+
+   // 跳转到详情页
+   const toPostDetail = () => {
+   	router.push({ name: 'post-id', params: { id: id.value } })
+   }
    </script>
    ```
-
-
 
 ## 自动导入 components
 
@@ -862,15 +776,13 @@ pages/
 
 ```vue
 <template>
-  <div>
-    <BaseHeader />
-    <NuxtPage />
-    <BaseFooter />
-  </div>
+	<div>
+		<BaseHeader />
+		<NuxtPage />
+		<BaseFooter />
+	</div>
 </template>
 ```
-
-
 
 ### 只在客户端渲染组件
 
@@ -878,13 +790,12 @@ pages/
 
 ```vue
 <template>
-  <div>
-    <Sidebar />
-    <ClientOnly>
-      <!-- 该组件只会在客户端渲染 -->
-      <Comments />
-    </ClientOnly>
-  </div>
+	<div>
+		<Sidebar />
+		<ClientOnly>
+			<!-- 该组件只会在客户端渲染 -->
+			<Comments />
+		</ClientOnly>
+	</div>
 </template>
 ```
-
