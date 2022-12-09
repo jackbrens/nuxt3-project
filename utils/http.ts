@@ -24,6 +24,9 @@ const fetch = async (url: string, options: any = {}): Promise<any> => {
 	// 从 useRuntimeConfig 中获取环境变量中的 url 地址
 	const { VITE_API_URL } = useRuntimeConfig()
 	const reqUrl = (VITE_API_URL ?? '') + url
+
+	console.log('options====', reqUrl, options)
+
 	return await useFetch<HttpResponse>(reqUrl, options).then(({ data, error }) => {
 		// 请求成功
 		if (!error.value && data.value) {
@@ -44,8 +47,8 @@ export default class Http {
 		return fetch(url, { method: 'get', query })
 	}
 
-	static post(url: string, body: any = {}): Promise<any> {
-		return fetch(url, { method: 'post', body })
+	static post(url: string, body: any = {}, query?: any): Promise<any> {
+		return fetch(url, { method: 'post', body, query })
 	}
 
 	static put(url: string, body: any = {}): Promise<any> {

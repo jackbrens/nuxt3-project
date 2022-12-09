@@ -1,1 +1,13 @@
 $theme-color: pink;
+$juejin-navigation: #fff;
+$juejin-font-2: #515767;
+$juejin-brand-1-normal: #1e80ff;
+
+@mixin text-overflow($number: 1) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: $number;
+	line-clamp: $number;
+	-webkit-box-orient: vertical;
+}

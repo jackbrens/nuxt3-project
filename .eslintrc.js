@@ -13,6 +13,8 @@ module.exports = {
 	rules: {
 		'no-undef': 0,
 		'vue/multi-word-component-names': 0,
+		// 关闭非驼峰命名法提示错误
+		camelcase: 0,
 		// 末尾不要分号
 		semi: 2,
 		// 单引号
