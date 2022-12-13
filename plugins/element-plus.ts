@@ -1,6 +1,5 @@
-
 // @ts-ignore
-import ElementPlus from 'element-plus/dist/index.full'
+import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 export default defineNuxtPlugin((nuxtApp) => {

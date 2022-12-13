@@ -22,10 +22,12 @@ const fetch = async (url: string, options: any = {}): Promise<any> => {
 	options = configOptions(options)
 
 	// 从 useRuntimeConfig 中获取环境变量中的 url 地址
-	const { VITE_API_URL } = useRuntimeConfig()
-	const reqUrl = (VITE_API_URL ?? '') + url
+	const {
+		public: { VITE_API_URL },
+	} = useRuntimeConfig()
+	const reqUrl = (VITE_API_URL ?? 'https://api.juejin.cn') + url
 
-	console.log('options====', reqUrl, options)
+	// console.log('options====', reqUrl, options)
 
 	return await useFetch<HttpResponse>(reqUrl, options).then(({ data, error }) => {
 		// 请求成功
