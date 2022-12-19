@@ -116,7 +116,8 @@ import { recommendDate } from '@/utils'
 
 const loading = ref(true)
 const recommend = ref<any>([])
-getRecommend().then(({ err_msg, data }) => {
+getRecommend().then(({ data, err_msg }) => {
+	// 提示一：延迟 1 秒替换骨架屏，目的是模拟掘金首页文章初次渲染的效果
 	setTimeout(() => {
 		if (err_msg === 'success') {
 			loading.value = false
@@ -128,6 +129,8 @@ getRecommend().then(({ err_msg, data }) => {
 })
 
 onMounted(() => {
+	// 提示二：延迟 1.5 秒原因是 loadingDiv 元素在 "提示一" 中需要延迟 1 秒后才渲染出来，
+	// 需要设置大于"提示一" 中的时间，不然拿不到元素
 	setTimeout(() => {
 		const loadingDiv = document.querySelector('#bottom-loading')
 		const observerFn = (entries: any) => {

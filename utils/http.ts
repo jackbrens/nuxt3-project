@@ -2,10 +2,10 @@ import { checkStatus } from '@/api/helper/checkStatus'
 import { useFetch, useRuntimeConfig } from '#app'
 
 // 接口统一返回类型
-export interface HttpResponse {
+export interface HttpResponse<T = unknown> {
 	code?: number
 	msg?: string
-	data?: any
+	data?: T
 }
 
 // 请求体拓展
@@ -18,6 +18,8 @@ function configOptions(options: any = {}) {
 	return options
 }
 
+const baseURL = 'https://api.juejin.cn'
+
 const fetch = async (url: string, options: any = {}): Promise<any> => {
 	options = configOptions(options)
 
@@ -25,10 +27,7 @@ const fetch = async (url: string, options: any = {}): Promise<any> => {
 	const {
 		public: { VITE_API_URL },
 	} = useRuntimeConfig()
-	const reqUrl = (VITE_API_URL ?? 'https://api.juejin.cn') + url
-
-	// console.log('options====', reqUrl, options)
-
+	const reqUrl = (VITE_API_URL ?? baseURL) + url
 	return await useFetch<HttpResponse>(reqUrl, options).then(({ data, error }) => {
 		// 请求成功
 		if (!error.value && data.value) {
@@ -39,25 +38,25 @@ const fetch = async (url: string, options: any = {}): Promise<any> => {
 				code: error.value?.statusCode || data.value?.code,
 			}
 			checkStatus(e.code as number)
-			return Promise.reject(e)
+			return Promise.reject(error)
 		}
 	})
 }
 
 export default class Http {
-	static get(url: string, query: any = {}): Promise<any> {
+	static get<T>(url: string, query: any = {}): Promise<HttpResponse<T>> {
 		return fetch(url, { method: 'get', query })
 	}
 
-	static post(url: string, body: any = {}, query?: any): Promise<any> {
+	static post<T>(url: string, body: any = {}, query?: any): Promise<HttpResponse<T>> {
 		return fetch(url, { method: 'post', body, query })
 	}
 
-	static put(url: string, body: any = {}): Promise<any> {
+	static put<T>(url: string, body: any = {}): Promise<HttpResponse<T>> {
 		return fetch(url, { method: 'put', body })
 	}
 
-	static delete(url: string, body: any = {}): Promise<any> {
+	static delete<T>(url: string, body: any = {}): Promise<HttpResponse<T>> {
 		return fetch(url, { method: 'delete', body })
 	}
 }

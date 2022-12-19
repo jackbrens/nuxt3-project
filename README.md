@@ -633,6 +633,18 @@ import { Search } from '@element-plus/icons-vue'
 
 ## 统一封装请求
 
+## 环境变量配置
+
+## pinia 状态管理
+
+### pnia 安装
+
+### 实现主体化功能
+
+## nuxt.config.ts 常用配置
+
+## 多媒体适配（响应式）
+
 ## 约定路由
 
 > **Nuxt3 内部整合了 `vue-router` ，只有在 `pages` 文件夹中新建 `vue` 组件，才会在路由表中新增对应的映射，这是规定**
