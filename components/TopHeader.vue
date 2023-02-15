@@ -96,7 +96,7 @@ import { ref, reactive } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { Login } from '@/api/interface'
-import { login, setToken } from '@/api/user'
+// import { login } from '@/api/user'
 const navList = [
 	{
 		id: 1,
@@ -152,10 +152,10 @@ const openDialog = () => {
 // 提交表单
 const submitForm = async (formEl: FormInstance | undefined) => {
 	if (!formEl) return
-	await formEl.validate(async (valid, fields) => {
+	await formEl.validate((valid, fields) => {
 		if (valid) {
-			const res = await login(ruleForm)
-			console.log(res)
+			// const res = await login(ruleForm)
+			// console.log(res)
 
 			// 登录成功
 			// if (code === 200 && token) {

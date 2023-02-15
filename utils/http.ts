@@ -26,12 +26,12 @@ const fetch = (url: string, options?: any): Promise<any> => {
 	const reqUrl = baseUrl + url
 
 	const _options = configOptions(options)
-	console.log(_options)
+	// console.log(_options)
 
 	return new Promise((resolve, reject) => {
 		useFetch(reqUrl, { ..._options })
 			.then(({ data }: any) => {
-				console.log(data)
+				// console.log(data)
 
 				// 请求成功 200
 				if (data.value.code === 200) {
