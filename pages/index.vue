@@ -36,7 +36,7 @@
 								<div class="meta-container">
 									<a class="user-message">{{ item.item_info.author_user_info.user_name }}</a>
 									<div class="date">
-										{{ recommendDate(item.item_info.article_info.ctime) }}
+										{{ recommendDate(changeDate(item.item_info.article_info.ctime)) }}
 									</div>
 								</div>
 								<div class="content-wrapper">
@@ -111,26 +111,26 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { getRecommend } from '@/api/user'
-import { recommendDate } from '@/utils'
+import { recommendDate, changeDate } from '@/utils'
 
 const loading = ref(true)
 const recommend = ref<any>([])
-getRecommend().then(({ data, err_msg }) => {
-	// 提示一：延迟 1 秒替换骨架屏，目的是模拟掘金首页文章初次渲染的效果
-	setTimeout(() => {
-		if (err_msg === 'success') {
-			loading.value = false
 
-			// 过滤一下，把不是文章类型的去掉
-			recommend.value = data.filter((v: { item_type: number }) => v.item_type === 2)
-		}
-	}, 1000)
-})
+// 提示一：延迟 1 秒替换骨架屏，目的是模拟掘金首页文章初次渲染的效果
+setTimeout(async () => {
+	loading.value = false
+	const { data }: any = await useFetch('https://mock.mengxuegu.com/mock/63eb40404b99657e29850a49/article/list', {
+		method: 'get',
+	})
+
+	// 过滤一下，把不是文章类型的去掉
+	recommend.value = data.value.data.filter((v: { item_type: number }) => v.item_type === 2)
+}, 1000)
 
 onMounted(() => {
 	// 提示二：延迟 1.5 秒原因是 loadingDiv 元素在 "提示一" 中需要延迟 1 秒后才渲染出来，
 	// 需要设置大于"提示一" 中的时间，不然拿不到元素
+
 	setTimeout(() => {
 		const loadingDiv = document.querySelector('#bottom-loading')
 		const observerFn = (entries: any) => {
@@ -138,11 +138,14 @@ onMounted(() => {
 				// 一旦元素可见，调用函数
 				if (item.isIntersecting) {
 					// console.log('可见了.........')
-					const { data, err_msg } = await getRecommend(Date.now())
-					if (err_msg === 'success') {
-						const list = data.filter((v: { item_type: number }) => v.item_type === 2)
-						recommend.value = [...recommend.value, ...list]
-					}
+					const { data }: any = await useFetch(
+						'https://mock.mengxuegu.com/mock/63eb40404b99657e29850a49/article/list',
+						{
+							method: 'get',
+						}
+					)
+					const list = data.value.data.filter((v: { item_type: number }) => v.item_type === 2)
+					recommend.value = [...recommend.value, ...list]
 				}
 			})
 		}

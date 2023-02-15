@@ -40,6 +40,41 @@
 							</a>
 						</li>
 						<li class="nav-item menu">
+							<div class="login-button-wrapper">
+								<button class="login-button" @click="openDialog()">登录 | 注册</button>
+								<ClientOnly>
+									<el-dialog
+										v-model="visible"
+										:show-close="false"
+										width="660px"
+										:close-on-click-modal="false"
+										align-center
+									>
+										<template #header="{ close, titleId, titleClass }">
+											<div class="my-header">
+												<span :id="titleId" :class="titleClass">登录掘金畅享更多权益</span>
+												<el-icon @click="close"><Close /></el-icon>
+											</div>
+										</template>
+										<div class="login-body">
+											<span>密码登录</span>
+											<el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" size="large">
+												<el-form-item prop="name">
+													<el-input v-model="ruleForm.name" placeholder="请输入邮箱/手机号（国际号码加区号）" />
+												</el-form-item>
+												<el-form-item prop="password">
+													<el-input v-model="ruleForm.password" placeholder="请输入密码" />
+												</el-form-item>
+												<el-form-item>
+													<el-button type="primary" style="width: 100%" @click="submitForm(ruleFormRef)"
+														>登录</el-button
+													>
+												</el-form-item>
+											</el-form>
+										</div>
+									</el-dialog>
+								</ClientOnly>
+							</div>
 							<div class="avatar-wrapper" data-v-d86115f8="">
 								<img
 									src="https://p3-passport.byteimg.com/img/user-avatar/19f8f5039f149b730e43da0cb19419cd~100x100.awebp"
@@ -57,6 +92,11 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, reactive } from 'vue'
+import { Close } from '@element-plus/icons-vue'
+import { FormInstance, FormRules } from 'element-plus'
+import { Login } from '@/api/interface'
+import { login, setToken } from '@/api/user'
 const navList = [
 	{
 		id: 1,
@@ -91,6 +131,46 @@ const navList = [
 		label: '插件',
 	},
 ]
+
+const visible = ref(true)
+const ruleFormRef = ref<FormInstance>()
+const ruleForm = reactive<Login.ReqLoginForm>({
+	name: '',
+	password: '',
+})
+const rules = reactive<FormRules>({
+	name: [{ required: true, message: '手机号或邮箱不能为空', trigger: 'blur' }],
+	password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
+})
+
+// 打开登录对话框
+const openDialog = () => {
+	visible.value = true
+	resetForm(ruleFormRef.value)
+}
+
+// 提交表单
+const submitForm = async (formEl: FormInstance | undefined) => {
+	if (!formEl) return
+	await formEl.validate(async (valid, fields) => {
+		if (valid) {
+			const res = await login(ruleForm)
+			console.log(res)
+
+			// 登录成功
+			// if (code === 200 && token) {
+			// 	setToken(token)
+			// }
+			visible.value = false
+		}
+	})
+}
+
+// 重置表单
+const resetForm = (formEl: FormInstance | undefined) => {
+	if (!formEl) return
+	formEl.resetFields()
+}
 </script>
 
 <style lang="scss" scoped>
@@ -151,16 +231,61 @@ const navList = [
 						display: flex;
 						align-items: center;
 						padding: 0 12px;
-						cursor: pointer;
 					}
 					.notification {
 						fill: #8a919f;
 						stroke: #8a919f;
 					}
 					.menu {
+						.login-button-wrapper {
+							.login-button {
+								cursor: pointer;
+								background: rgba(30, 128, 255, 0.05);
+								border: 1px solid rgba(30, 128, 255, 0.3);
+								border-radius: 4px;
+								padding: 4px 12px;
+								color: #007fff;
+								line-height: 22px;
+								font-size: 14px;
+								font-weight: 400;
+								margin-right: 24px;
+								height: 36px;
+								overflow: hidden;
+							}
+							.my-header {
+								display: flex;
+								justify-content: space-between;
+								border-bottom: 1px solid rgba(228, 230, 235, 0.5);
+								padding-bottom: 24px;
+								span {
+									font-size: 20px;
+								}
+								i {
+									cursor: pointer;
+									color: $juejin-font-2 !important;
+									width: 24px;
+									height: 24px;
+									svg {
+										width: 100%;
+										height: 100%;
+									}
+								}
+							}
+							.login-body {
+								width: 50%;
+								& > span {
+									display: inline-block;
+									font-size: 16px;
+									color: #000;
+									margin-bottom: 24px;
+								}
+							}
+						}
+
 						.avatar-wrapper {
 							margin-right: 24px;
 							img {
+								cursor: pointer;
 								width: 36px;
 								height: 36px;
 								border-radius: 50%;
