@@ -108,12 +108,6 @@ import { getRecommend } from '@/api/user'
 const loading = ref(true)
 const recommend = ref<any>([])
 
-// 请求接口获取文章列表
-const { data }: any = await getRecommend()
-
-// 过滤一下，把不是文章类型的去掉
-recommend.value = data.value.filter((v: { item_type: number }) => v.item_type === 2)
-
 // 提示一：延迟 1 秒替换骨架屏，目的是模拟掘金首页文章初次渲染的效果
 setTimeout(() => {
 	loading.value = false
@@ -131,7 +125,8 @@ onMounted(() => {
 				if (item.isIntersecting) {
 					const { data }: any = await getRecommend()
 
-					const list = data?.value?.filter((v: { item_type: number }) => v.item_type === 2)
+					// 过滤一下，把不是文章类型的去掉
+					const list = data?.filter((v: { item_type: number }) => v.item_type === 2)
 					recommend.value = [...recommend.value, ...list]
 				}
 			})

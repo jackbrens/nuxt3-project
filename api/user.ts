@@ -1,8 +1,8 @@
+import Http from '../utils/request'
 import { Login } from './interface'
-import { useHttpGet, useHttpPost } from './request'
 
 export const getRecommend = () => {
-	return useHttpGet('/article/list')
+	return Http.get('/article/list')
 }
 
 /**
@@ -11,17 +11,17 @@ export const getRecommend = () => {
  * @returns {object}
  */
 export const login = (data: Login.ReqLoginForm) => {
-	return useHttpPost('/user/login', data)
+	return Http.post('/user/login', data)
 }
 
 export const setToken = (token: string) => {
-	window.localStorage.setItem('success_token', token)
+	return window.localStorage.setItem('success_token', token)
 }
 
 export const getToken = () => {
-	window.localStorage.getItem('success_token')
+	return window.localStorage.getItem('success_token')
 }
 
 export const removeToken = () => {
-	window.localStorage.removeItem('success_token')
+	return window.localStorage.removeItem('success_token')
 }
