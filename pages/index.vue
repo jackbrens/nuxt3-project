@@ -23,13 +23,6 @@
 					<div v-if="loading" style="padding: 20px">
 						<el-skeleton :rows="3" animated />
 					</div>
-					<!-- <el-skeleton :loading="loading" animated> -->
-					<!-- <template #template>
-							<div style="padding: 20px">
-								<el-skeleton :rows="3" />
-							</div>
-						</template> -->
-					<!-- <template #default> -->
 					<div v-else class="entry-list-wrap">
 						<li v-for="(item, index) in recommend" :key="index" class="entry-item">
 							<div class="entry">
@@ -67,8 +60,6 @@
 							style="text-align: center; color: #86909c; height: 40px"
 						></div>
 					</div>
-					<!-- </template> -->
-					<!-- </el-skeleton> -->
 				</ClientOnly>
 			</div>
 			<aside class="sidebar">
@@ -112,19 +103,20 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { recommendDate, changeDate } from '@/utils'
+import { getRecommend } from '@/api/user'
 
 const loading = ref(true)
 const recommend = ref<any>([])
 
-// 提示一：延迟 1 秒替换骨架屏，目的是模拟掘金首页文章初次渲染的效果
-setTimeout(async () => {
-	loading.value = false
-	const { data }: any = await useFetch('https://mock.mengxuegu.com/mock/63eb40404b99657e29850a49/article/list', {
-		method: 'get',
-	})
+// 请求接口获取文章列表
+const { data }: any = await getRecommend()
 
-	// 过滤一下，把不是文章类型的去掉
-	recommend.value = data.value.data.filter((v: { item_type: number }) => v.item_type === 2)
+// 过滤一下，把不是文章类型的去掉
+recommend.value = data.value.filter((v: { item_type: number }) => v.item_type === 2)
+
+// 提示一：延迟 1 秒替换骨架屏，目的是模拟掘金首页文章初次渲染的效果
+setTimeout(() => {
+	loading.value = false
 }, 1000)
 
 onMounted(() => {
@@ -137,14 +129,9 @@ onMounted(() => {
 			entries.forEach(async (item: any) => {
 				// 一旦元素可见，调用函数
 				if (item.isIntersecting) {
-					// console.log('可见了.........')
-					const { data }: any = await useFetch(
-						'https://mock.mengxuegu.com/mock/63eb40404b99657e29850a49/article/list',
-						{
-							method: 'get',
-						}
-					)
-					const list = data.value.data.filter((v: { item_type: number }) => v.item_type === 2)
+					const { data }: any = await getRecommend()
+
+					const list = data?.value?.filter((v: { item_type: number }) => v.item_type === 2)
 					recommend.value = [...recommend.value, ...list]
 				}
 			})

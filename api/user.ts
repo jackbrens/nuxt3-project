@@ -1,8 +1,8 @@
 import { Login } from './interface'
-import Http from '@/utils/http'
+import { useHttpGet, useHttpPost } from './request'
 
-export const getRecommend = (timestamp?: number) => {
-	return Http.get('/article/list')
+export const getRecommend = () => {
+	return useHttpGet('/article/list')
 }
 
 /**
@@ -11,31 +11,8 @@ export const getRecommend = (timestamp?: number) => {
  * @returns {object}
  */
 export const login = (data: Login.ReqLoginForm) => {
-	return Http.post('https://juejin.cn/passport/web/user/login?account_sdk_source=web', {
-		account: 3437343434,
-		password: 34343434343434,
-		captcha: '',
-		aid: 2608,
-		is_sso: false,
-		host: '',
-		mix_mode: 1,
-	})
-	// return {
-	// 	token: randomToken(),
-	// 	code: 200,
-	// 	error_massage: 'success',
-	// }
+	return useHttpPost('/user/login', data)
 }
-
-// 生成随机token
-// const randomToken = () => {
-// 	let token = ''
-// 	for (let i = 1; i <= 32; i++) {
-// 		const n = Math.floor(Math.random() * 16.0).toString(16)
-// 		token += n
-// 	}
-// 	return token
-// }
 
 export const setToken = (token: string) => {
 	window.localStorage.setItem('success_token', token)
