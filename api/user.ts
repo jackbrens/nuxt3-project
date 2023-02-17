@@ -15,11 +15,11 @@ export const login = (data: Login.ReqLoginForm) => {
 }
 
 export const setToken = (token: string) => {
-	return window.localStorage.setItem('success_token', token)
+	return window.localStorage.setItem('success-token', token)
 }
 
 export const getToken = () => {
-	return window.localStorage.getItem('success_token')
+	return window.localStorage.getItem('success-token')
 }
 
 export const removeToken = () => {
