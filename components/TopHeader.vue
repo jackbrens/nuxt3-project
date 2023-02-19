@@ -82,12 +82,24 @@
 									</ClientOnly>
 								</div>
 								<div v-show="useGlobalStore.getUserInfo" class="avatar-wrapper" data-v-d86115f8="">
-									<img
-										src="https://p3-passport.byteimg.com/img/user-avatar/19f8f5039f149b730e43da0cb19419cd~100x100.awebp"
-										alt="JackBrens的头像"
-										class="lazy avatar avatar immediate"
-										loading="lazy"
-									/>
+									<el-popconfirm
+										width="220"
+										confirm-button-text="yes"
+										cancel-button-text="no"
+										:icon="InfoFilled"
+										icon-color="#626AEF"
+										title="是否退出登录？"
+										@confirm="logout"
+									>
+										<template #reference>
+											<img
+												src="https://p3-passport.byteimg.com/img/user-avatar/19f8f5039f149b730e43da0cb19419cd~100x100.awebp"
+												alt="JackBrens的头像"
+												class="lazy avatar avatar immediate"
+												loading="lazy"
+											/>
+										</template>
+									</el-popconfirm>
 								</div>
 							</li>
 						</ul>
@@ -100,12 +112,14 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
-import { Close } from '@element-plus/icons-vue'
+import { Close, InfoFilled } from '@element-plus/icons-vue'
 import { FormInstance, FormRules } from 'element-plus'
+import { useRouter } from 'vue-router'
 import { Login } from '@/api/interface'
 import { login, setToken } from '@/api/user'
 import { GlobalStore } from '@/store'
 const useGlobalStore = GlobalStore()
+const router = useRouter()
 const navList = [
 	{
 		id: 1,
@@ -179,6 +193,14 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 const resetForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return
 	formEl.resetFields()
+}
+
+// 退出登录
+const logout = () => {
+	useGlobalStore.setUserInfo('')
+
+	// 刷新页面
+	router.go(0)
 }
 </script>
 
