@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 			baseUrl: loadEnv(process.argv[process.argv.length - 1], './env').VITE_API_URL,
 		},
 	},
+	modules: ['@pinia/nuxt'],
 	vite: {
 		css: {
 			preprocessorOptions: {

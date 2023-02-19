@@ -12,79 +12,86 @@
 					<ul class="isResourceVisible">
 						<li v-for="nav in navList" :key="nav.id" class="nav-item">{{ nav.label }}</li>
 					</ul>
-					<ul class="right-side-nav">
-						<li class="nav-item notification">
-							<a href="javascript:;" class="notification-a">
-								<svg
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									class="notification-icon"
-									data-v-d86115f8=""
-								>
-									<path
-										d="M6.01132 10.2856C6.28115 6.54234 8.68619 4.28564 11.9999 4.28564C15.3136 4.28564 17.7186 6.54234 17.9885 10.2856C18.1219 12.1363 18.4093 13.708 19.9473 15.8848C20.1889 16.2267 19.953 16.7142 19.5343 16.7142H4.46546C4.04679 16.7142 3.81092 16.2267 4.05252 15.8848C5.59053 13.708 5.87793 12.1363 6.01132 10.2856Z"
-										stroke-width="1.5"
-										stroke-linecap="round"
+					<ClientOnly>
+						<ul class="right-side-nav">
+							<li class="nav-item notification">
+								<a href="javascript:;" class="notification-a">
+									<svg
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+										class="notification-icon"
 										data-v-d86115f8=""
-									></path>
-									<path d="M11.9573 3.21436V4.28578" stroke-width="3" stroke-linecap="round" data-v-d86115f8=""></path>
-									<path
-										d="M9.57495 18.8569C9.92795 19.8557 10.8804 20.5712 12.0001 20.5712C13.1197 20.5712 14.0722 19.8557 14.4252 18.8569H9.57495Z"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										data-v-d86115f8=""
-									></path>
-								</svg>
-							</a>
-						</li>
-						<li class="nav-item menu">
-							<div class="login-button-wrapper">
-								<button class="login-button" @click="openDialog()">登录 | 注册</button>
-								<ClientOnly>
-									<el-dialog
-										v-model="visible"
-										:show-close="false"
-										width="660px"
-										:close-on-click-modal="false"
-										align-center
 									>
-										<template #header="{ close, titleId, titleClass }">
-											<div class="my-header">
-												<span :id="titleId" :class="titleClass">登录掘金畅享更多权益</span>
-												<el-icon @click="close"><Close /></el-icon>
+										<path
+											d="M6.01132 10.2856C6.28115 6.54234 8.68619 4.28564 11.9999 4.28564C15.3136 4.28564 17.7186 6.54234 17.9885 10.2856C18.1219 12.1363 18.4093 13.708 19.9473 15.8848C20.1889 16.2267 19.953 16.7142 19.5343 16.7142H4.46546C4.04679 16.7142 3.81092 16.2267 4.05252 15.8848C5.59053 13.708 5.87793 12.1363 6.01132 10.2856Z"
+											stroke-width="1.5"
+											stroke-linecap="round"
+											data-v-d86115f8=""
+										></path>
+										<path
+											d="M11.9573 3.21436V4.28578"
+											stroke-width="3"
+											stroke-linecap="round"
+											data-v-d86115f8=""
+										></path>
+										<path
+											d="M9.57495 18.8569C9.92795 19.8557 10.8804 20.5712 12.0001 20.5712C13.1197 20.5712 14.0722 19.8557 14.4252 18.8569H9.57495Z"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											data-v-d86115f8=""
+										></path>
+									</svg>
+								</a>
+							</li>
+							<li class="nav-item menu">
+								<div v-show="!useGlobalStore.getUserInfo" class="login-button-wrapper">
+									<button class="login-button" @click="openDialog()">登录 | 注册</button>
+									<ClientOnly>
+										<el-dialog
+											v-model="visible"
+											:show-close="false"
+											width="660px"
+											:close-on-click-modal="false"
+											align-center
+										>
+											<template #header="{ close, titleId, titleClass }">
+												<div class="my-header">
+													<span :id="titleId" :class="titleClass">登录掘金畅享更多权益</span>
+													<el-icon @click="close"><Close /></el-icon>
+												</div>
+											</template>
+											<div class="login-body">
+												<span>密码登录</span>
+												<el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" size="large">
+													<el-form-item prop="name">
+														<el-input v-model="ruleForm.name" placeholder="请输入邮箱/手机号（国际号码加区号）" />
+													</el-form-item>
+													<el-form-item prop="password">
+														<el-input v-model="ruleForm.password" placeholder="请输入密码" />
+													</el-form-item>
+													<el-form-item>
+														<el-button type="primary" style="width: 100%" @click="submitForm(ruleFormRef)"
+															>登录</el-button
+														>
+													</el-form-item>
+												</el-form>
 											</div>
-										</template>
-										<div class="login-body">
-											<span>密码登录</span>
-											<el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" size="large">
-												<el-form-item prop="name">
-													<el-input v-model="ruleForm.name" placeholder="请输入邮箱/手机号（国际号码加区号）" />
-												</el-form-item>
-												<el-form-item prop="password">
-													<el-input v-model="ruleForm.password" placeholder="请输入密码" />
-												</el-form-item>
-												<el-form-item>
-													<el-button type="primary" style="width: 100%" @click="submitForm(ruleFormRef)"
-														>登录</el-button
-													>
-												</el-form-item>
-											</el-form>
-										</div>
-									</el-dialog>
-								</ClientOnly>
-							</div>
-							<div class="avatar-wrapper" data-v-d86115f8="">
-								<img
-									src="https://p3-passport.byteimg.com/img/user-avatar/19f8f5039f149b730e43da0cb19419cd~100x100.awebp"
-									alt="JackBrens的头像"
-									class="lazy avatar avatar immediate"
-									loading="lazy"
-								/>
-							</div>
-						</li>
-					</ul>
+										</el-dialog>
+									</ClientOnly>
+								</div>
+								<div v-show="useGlobalStore.getUserInfo" class="avatar-wrapper" data-v-d86115f8="">
+									<img
+										src="https://p3-passport.byteimg.com/img/user-avatar/19f8f5039f149b730e43da0cb19419cd~100x100.awebp"
+										alt="JackBrens的头像"
+										class="lazy avatar avatar immediate"
+										loading="lazy"
+									/>
+								</div>
+							</li>
+						</ul>
+					</ClientOnly>
 				</ul>
 			</nav>
 		</div>
@@ -97,6 +104,8 @@ import { Close } from '@element-plus/icons-vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { Login } from '@/api/interface'
 import { login, setToken } from '@/api/user'
+import { GlobalStore } from '@/store'
+const useGlobalStore = GlobalStore()
 const navList = [
 	{
 		id: 1,
@@ -159,6 +168,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 			// 登录成功
 			if (code === 200 && data.token) {
 				setToken(data.token)
+				useGlobalStore.setUserInfo(data)
 			}
 			visible.value = false
 		}

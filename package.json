@@ -30,8 +30,11 @@
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.0.10",
+		"@pinia/nuxt": "^0.4.6",
 		"element-plus": "^2.2.25",
-		"moment": "^2.29.4"
+		"moment": "^2.29.4",
+		"pinia": "^2.0.30",
+		"pinia-plugin-persistedstate": "^3.0.2"
 	},
 	"config": {
 		"commitizen": {

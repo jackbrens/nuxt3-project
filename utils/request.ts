@@ -1,13 +1,7 @@
 import { hash } from 'ohash'
 import { checkStatus } from '@/api/helper/checkStatus'
 import { getToken } from '@/api/user'
-
-// 后端返回的数据类型
-export interface HttpResponse<T> {
-	code?: number
-	data?: T
-	msg?: string
-}
+import { HttpResponse } from '@/api/interface'
 
 // 请求体拓展
 function configOptions(options: any = {}) {
