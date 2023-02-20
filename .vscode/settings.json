@@ -2,8 +2,10 @@
 	"editor.formatOnSave": true,
 	"stylelint.enable": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.stylelint": true
+		"source.fixAll.stylelint": true,
+		"source.fixAll.eslint": true
 	},
 	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
+	"eslint.validate": ["vue", "html", "javascript", "typescript", "javascriptreact", "typescriptreact"],
 	"files.eol": "\n"
 }
