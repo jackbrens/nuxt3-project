@@ -3,6 +3,34 @@ $juejin-navigation: #fff;
 $juejin-font-2: #515767;
 $juejin-brand-1-normal: #1e80ff;
 
+#themeConfig.light {
+	--layout-background-color: #f4f5f5; // 布局背景颜色
+	--primary-color: #000; // 主要的字体颜色
+	--secondary-color: #86909c; // 次一级字体颜色，例如：文章描述
+	--primary-background-color: #ffffff; // 主要的背景色
+	--navbar-background-color: #ffffff; // navbar组件的背景色
+	--juejin-color-nav-title: #515767; // navbar组件字体颜色
+	--link-color: #0070f3; // 链接 hover 上去的颜色
+	--article-title-color: #000; // 文章标题字体颜色
+	--article-desc-color: #86909c; // 文章描述字体颜色
+	--article-hover-bg: #fafafa; // 文章hover背景颜色
+	--border-line-color: #9797971a; // 边框颜色
+}
+
+#themeConfig.dark {
+	--layout-background-color: #000;
+	--primary-color: #ffffff;
+	--secondary-color: #f9f9f999;
+	--primary-background-color: #0e0e0e;
+	--navbar-background-color: #272727;
+	--juejin-color-nav-title: #e3e3e3;
+	--link-color: #34a8eb;
+	--article-title-color: #e3e3e3;
+	--article-desc-color: #a9a9a9;
+	--article-hover-bg: #3a3a3a;
+	--border-line-color: #9797971a;
+}
+
 @mixin text-overflow($number: 1) {
 	overflow: hidden;
 	text-overflow: ellipsis;

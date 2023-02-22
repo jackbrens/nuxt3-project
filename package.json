@@ -32,7 +32,9 @@
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.0.10",
 		"@pinia/nuxt": "^0.4.6",
+		"@types/js-cookie": "^3.0.3",
 		"element-plus": "^2.2.25",
+		"js-cookie": "^3.0.1",
 		"moment": "^2.29.4",
 		"pinia": "^2.0.30",
 		"pinia-plugin-persistedstate": "^3.0.2"

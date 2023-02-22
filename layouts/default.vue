@@ -11,7 +11,9 @@
 
 <style lang="scss" scoped>
 .main {
-	margin: 120px auto 0;
+	margin: 0 auto;
+	padding-top: 120px;
 	max-width: 960px;
+	box-sizing: border-box;
 }
 </style>

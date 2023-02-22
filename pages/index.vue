@@ -150,7 +150,7 @@ onMounted(() => {
 		box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 		transition: all 0.2s;
 		transform: translateZ(0);
-		background-color: $juejin-navigation;
+		background-color: var(--navbar-background-color);
 		.nav-list {
 			max-width: 960px;
 			height: 100%;
@@ -158,7 +158,7 @@ onMounted(() => {
 			display: flex;
 			align-items: center;
 			.nav-item {
-				color: $juejin-font-2;
+				color: var(--juejin-color-nav-title);
 				padding: 0 12px;
 			}
 			.nav-item:first-of-type {
@@ -170,13 +170,13 @@ onMounted(() => {
 		box-sizing: border-box;
 		position: relative;
 		.timeline-entry-list {
-			background-color: $juejin-navigation;
+			background-color: var(--navbar-background-color);
 			width: 700px;
 			.list-header {
-				color: $juejin-font-2;
+				color: var(--juejin-color-nav-title);
 				font-size: 14px;
 				padding: 15px 12px;
-				border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
+				border-bottom: 1px solid var(--border-line-color);
 				.list-nav {
 					.nav-list {
 						display: flex;
@@ -184,9 +184,9 @@ onMounted(() => {
 							cursor: pointer;
 							padding: 0 14px;
 							font-size: 15px;
-							border-right: 1px solid hsla(0, 0%, 59.2%, 0.2);
+							border-right: 1px solid var(--border-line-color);
 							&:hover {
-								color: #000;
+								color: var(--link-color);
 							}
 						}
 					}
@@ -199,11 +199,11 @@ onMounted(() => {
 						cursor: pointer;
 						padding: 12px 20px 0;
 						&:hover {
-							background: #fafafa;
+							background: var(--article-hover-bg);
 						}
 						.meta-container {
 							font-size: 13px;
-							color: #86909c;
+							color: var(--secondary-color);
 							display: flex;
 							.user-message {
 								display: flex;
@@ -254,7 +254,7 @@ onMounted(() => {
 						.content-wrapper {
 							display: flex;
 							padding-bottom: 12px;
-							border-bottom: 1px solid rgba(228, 230, 235, 0.5);
+							border-bottom: 1px solid var(--border-line-color);
 							margin-top: 10px;
 							width: 100%;
 							.content-main {
@@ -266,13 +266,13 @@ onMounted(() => {
 										font-weight: 700;
 										font-size: 16px;
 										line-height: 24px;
-										color: #1d2129;
+										color: var(--primary-color);
 										width: 100%;
 										@include text-overflow(1);
 									}
 								}
 								.abstract {
-									color: #86909c;
+									color: var(--secondary-color);
 									font-size: 13px;
 									line-height: 22px;
 									@include text-overflow(1);
