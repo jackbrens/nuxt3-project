@@ -253,6 +253,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 				useGlobalStore.setUserInfo(data)
 			}
 			visible.value = false
+
+			// 刷新页面
+			router.go(0)
 		}
 	})
 }
@@ -300,7 +303,7 @@ const changeThemePriamry = (val: string) => {
 	background: var(--navbar-background-color);
 	border-bottom: 1px solid var(--border-line-color);
 	color: var(--juejin-color-nav-title);
-	height: 60px;
+	height: torem(60);
 	z-index: 250;
 	.container {
 		height: 100%;

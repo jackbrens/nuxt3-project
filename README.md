@@ -631,7 +631,7 @@ import { Search } from '@element-plus/icons-vue'
 </script>
 ```
 
-
+## 使用 Easy Mock 实现后台接口数据
 
 ## 统一封装请求
 
@@ -702,21 +702,21 @@ export default class Http {
 }
 ```
 
-
-
-
-
 ## 环境变量配置
 
 ## pinia 状态管理
 
 ### pnia 安装
 
-### 实现主体化功能
+### 实现主题化功能
 
 ## nuxt.config.ts 常用配置
 
-## 多媒体适配（响应式）
+## 多媒体适配和设备兼容方案
+
+## 首屏优化方案（对大图压缩成 webp）
+
+## 线上部署
 
 ## 约定路由
 

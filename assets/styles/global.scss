@@ -1,7 +1,7 @@
-$theme-color: pink;
-$juejin-navigation: #fff;
-$juejin-font-2: #515767;
-$juejin-brand-1-normal: #1e80ff;
+@use 'sass:math';
+
+// 根元素大小
+$rootValue: 12;
 
 #themeConfig.light {
 	--layout-background-color: #f4f5f5; // 布局背景颜色
@@ -38,4 +38,32 @@ $juejin-brand-1-normal: #1e80ff;
 	-webkit-line-clamp: $number;
 	line-clamp: $number;
 	-webkit-box-orient: vertical;
+}
+
+// 写一个自定义函数，让 px 换算 rem 时，可以控制小数点的位数，要不计算出来太长了
+// 第一个参数为需要处理的数值，第二个为小数点后取几位数
+@function decimalRound($number, $digits: 0) {
+	$n: 1;
+	@if type-of($number) != number {
+		@warn '#{ $number } is not a number.';
+		@return $number;
+	}
+	@if type-of($digits) != number {
+		@warn '#{ $digits } is not a number.';
+		@return $number;
+		// digits 不能带单位
+	} @else if not unitless($digits) {
+		@warn '#{ $digits } has a unit.';
+		@return $number;
+	}
+	@if $digits > 0 {
+		@for $i from 1 through $digits {
+			$n: $n * 10;
+		}
+	}
+	@return calc(round($number * $n) / $n);
+}
+
+@function torem($px) {
+	@return decimalRound(math.div($px, $rootValue), 3) * 1rem;
 }

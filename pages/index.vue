@@ -299,7 +299,7 @@ onMounted(() => {
 			width: 240px;
 			height: 200vh;
 			.signin {
-				background-color: $juejin-navigation;
+				background-color: #fff;
 				width: 240px;
 				margin-bottom: 16px;
 				padding: 16px;
@@ -351,7 +351,7 @@ onMounted(() => {
 			}
 			.sidebar-block {
 				overflow: hidden;
-				background-color: $juejin-navigation;
+				background-color: #fff;
 				box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 				border-radius: 2px;
 				margin-bottom: 1.3rem;
