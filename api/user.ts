@@ -5,6 +5,36 @@ export const getRecommend = () => {
 	return Http.get('/article/list')
 }
 
+export const getRecommendAll = () => {
+	return new Promise((resolve, reject) => {
+		useFetch(
+			'https://api.juejin.cn/recommend_api/v1/article/recommend_all_feed?aid=2608&uuid=7250374211875980839&spider=0',
+			{
+				method: 'post',
+				body: {
+					client_type: 2608,
+					cursor: '0',
+					id_type: 2,
+					limit: 20,
+					sort_type: 200,
+				},
+			}
+		)
+			.then(({ data, error, refresh }) => {
+				// refresh()
+				if (error.value) {
+					reject(error.value)
+					return
+				}
+				const dataValue: any = data.value
+				resolve(dataValue)
+			})
+			.catch((err: any) => {
+				reject(err)
+			})
+	})
+}
+
 /**
  *
  * @param {Login.ReqLoginForm} data - 用户账号和密码

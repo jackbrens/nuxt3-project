@@ -3,6 +3,11 @@ import { resolve } from 'pathe'
 import { loadEnv } from 'vite'
 
 export default defineNuxtConfig({
+	app: {
+		head: {
+			meta: [{ name: 'referrer', content: 'no-referrer' }],
+		},
+	},
 	runtimeConfig: {
 		// 运行时常量
 		public: {

@@ -25,7 +25,3 @@ moment.updateLocale('zh-cn', {
 export const recommendDate = (timestamp: number | string) => {
 	return moment(Number(timestamp) * 1000).fromNow()
 }
-
-export const changeDate = (date: string) => {
-	return moment(date).format('X')
-}

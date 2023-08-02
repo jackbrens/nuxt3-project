@@ -19,48 +19,46 @@
 						</ul>
 					</nav>
 				</header>
-				<ClientOnly>
-					<div v-if="loading" style="padding: 20px">
-						<el-skeleton :rows="3" animated />
-					</div>
-					<div v-else class="entry-list-wrap">
-						<li v-for="(item, index) in recommend" :key="index" class="entry-item">
-							<div class="entry">
-								<div class="meta-container">
-									<a class="user-message">{{ item.item_info.author_user_info.user_name }}</a>
-									<div class="date">
-										{{ recommendDate(changeDate(item.item_info.article_info.ctime)) }}
-									</div>
-								</div>
-								<div class="content-wrapper">
-									<div class="content-main">
-										<div class="title-row">
-											<a :title="item.item_info.article_info.title" class="title">{{
-												item.item_info.article_info.title
-											}}</a>
-										</div>
-										<div class="abstract">
-											{{ item.item_info.article_info.brief_content }}
-										</div>
-									</div>
-									<img
-										v-if="item.item_info.article_info.cover_image"
-										:src="item.item_info.article_info.cover_image"
-										class="thumb"
-										:alt="item.item_info.article_info.title"
-										loading="lazy"
-									/>
+				<div v-if="loading" style="padding: 20px">
+					<el-skeleton :rows="3" animated />
+				</div>
+				<div v-else class="entry-list-wrap">
+					<li v-for="(item, index) in recommend" :key="index" class="entry-item">
+						<div class="entry">
+							<div class="meta-container">
+								<a class="user-message">{{ item.item_info.author_user_info.user_name }}</a>
+								<div class="date">
+									{{ recommendDate(item.item_info.article_info.ctime) }}
 								</div>
 							</div>
-						</li>
-						<div
-							id="bottom-loading"
-							ref="bottomLoading"
-							class="bottom-loading"
-							style="text-align: center; color: #86909c; height: 40px"
-						></div>
-					</div>
-				</ClientOnly>
+							<div class="content-wrapper">
+								<div class="content-main">
+									<div class="title-row">
+										<a :title="item.item_info.article_info.title" class="title">{{
+											item.item_info.article_info.title
+										}}</a>
+									</div>
+									<div class="abstract">
+										{{ item.item_info.article_info.brief_content }}
+									</div>
+								</div>
+								<img
+									v-if="item.item_info.article_info.cover_image"
+									:src="item.item_info.article_info.cover_image"
+									class="thumb"
+									:alt="item.item_info.article_info.title"
+									loading="lazy"
+								/>
+							</div>
+						</div>
+					</li>
+					<div
+						id="bottom-loading"
+						ref="bottomLoading"
+						class="bottom-loading"
+						style="text-align: center; color: #86909c; height: 40px"
+					></div>
+				</div>
 			</div>
 			<aside class="sidebar">
 				<div class="signin">
@@ -102,8 +100,8 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { recommendDate, changeDate } from '@/utils'
-import { getRecommend } from '@/api/user'
+import { recommendDate } from '@/utils'
+import { getRecommendAll } from '@/api/user'
 
 const loading = ref(true)
 const recommend = ref<any>([])
@@ -112,6 +110,9 @@ const recommend = ref<any>([])
 setTimeout(() => {
 	loading.value = false
 }, 1000)
+
+const { data }: any = await getRecommendAll()
+recommend.value = data.filter((v: { item_type: number }) => v.item_type === 2)
 
 onMounted(() => {
 	// 提示二：延迟 1.5 秒原因是 loadingDiv 元素在 "提示一" 中需要延迟 1 秒后才渲染出来，
@@ -123,10 +124,10 @@ onMounted(() => {
 			entries.forEach(async (item: any) => {
 				// 一旦元素可见，调用函数
 				if (item.isIntersecting) {
-					const { data }: any = await getRecommend()
+					const { data }: any = await getRecommendAll()
 
 					// 过滤一下，把不是文章类型的去掉
-					const list = data?.filter((v: { item_type: number }) => v.item_type === 2)
+					const list = data.filter((v: { item_type: number }) => v.item_type === 2)
 					recommend.value = [...recommend.value, ...list]
 				}
 			})
