@@ -36,7 +36,52 @@ export const getRecommendAll = () => {
 }
 
 /**
- *
+ * 通过 id 获取文章详情
+ * @param article_id
+ * @returns
+ */
+export const getArticleDetail = (article_id: string) => {
+	return new Promise((resolve, reject) => {
+		useFetch('https://api.juejin.cn/content_api/v1/article/detail', {
+			method: 'post',
+			body: {
+				article_id,
+			},
+		})
+			.then(({ data, error }) => {
+				if (error.value) {
+					reject(error.value)
+					return
+				}
+				resolve(data.value)
+			})
+			.catch((err: any) => {
+				reject(err)
+			})
+	})
+}
+
+// 获取类别摘要
+export const getCategoryBriefs = () => {
+	return new Promise((resolve, reject) => {
+		useFetch('https://api.juejin.cn/tag_api/v1/query_category_briefs', {
+			method: 'get',
+		})
+			.then(({ data, error }) => {
+				if (error.value) {
+					reject(error.value)
+					return
+				}
+				resolve(data.value)
+			})
+			.catch((err: ErrorEvent) => {
+				reject(err)
+			})
+	})
+}
+
+/**
+ * 登录接口
  * @param {Login.ReqLoginForm} data - 用户账号和密码
  * @returns {object}
  */

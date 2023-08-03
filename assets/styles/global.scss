@@ -15,6 +15,7 @@ $rootValue: 12;
 	--article-desc-color: #86909c; // 文章描述字体颜色
 	--article-hover-bg: #fafafa; // 文章hover背景颜色
 	--border-line-color: #9797971a; // 边框颜色
+	--juejin-gray-3: #f7f8fa;
 }
 
 #themeConfig.dark {
@@ -29,6 +30,7 @@ $rootValue: 12;
 	--article-desc-color: #a9a9a9;
 	--article-hover-bg: #3a3a3a;
 	--border-line-color: #9797971a;
+	--juejin-gray-3: #f7f8fa;
 }
 
 @mixin text-overflow($number: 1) {

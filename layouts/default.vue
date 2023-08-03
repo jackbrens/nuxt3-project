@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="container index-container">
 		<top-header />
-		<main class="main">
+		<main class="main-container">
 			<slot />
 		</main>
 	</div>
@@ -10,10 +10,15 @@
 <script></script>
 
 <style lang="scss" scoped>
-.main {
+.index-container {
+	max-width: 1200px;
+}
+.container {
+	position: relative;
 	margin: 0 auto;
-	padding-top: 120px;
-	max-width: 960px;
-	box-sizing: border-box;
+	width: 100%;
+}
+.main-container {
+	margin-top: 1.62rem;
 }
 </style>

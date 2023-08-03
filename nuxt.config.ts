@@ -25,7 +25,7 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	css: ['element-plus/dist/index.css', 'assets/styles/index.scss'],
+	css: ['element-plus/dist/index.css', 'assets/styles/index.scss', 'assets/styles/juejin.css'],
 	alias: {
 		'@': resolve(__dirname, './'),
 	},
