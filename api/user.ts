@@ -62,7 +62,7 @@ export const getArticleDetail = (article_id: string) => {
 }
 
 // 获取类别摘要
-export const getCategoryBriefs = () => {
+export const getCategoryBriefs = (): Promise<any> => {
 	return new Promise((resolve, reject) => {
 		useFetch('https://api.juejin.cn/tag_api/v1/query_category_briefs', {
 			method: 'get',
