@@ -38,9 +38,9 @@ export const getRecommendAll = () => {
 /**
  * 通过 id 获取文章详情
  * @param article_id
- * @returns
+ * @returns {Promise}
  */
-export const getArticleDetail = (article_id: string) => {
+export const getArticleDetail = (article_id: string): Promise<any> => {
 	return new Promise((resolve, reject) => {
 		useFetch('https://api.juejin.cn/content_api/v1/article/detail', {
 			method: 'post',

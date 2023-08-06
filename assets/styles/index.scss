@@ -5,6 +5,11 @@ body {
 	font-size: $rootValue + px;
 }
 
+// 解决 锚点位置被头部导航挡住部分内容的问题
+html {
+	scroll-padding-top: 6rem;
+}
+
 ol,
 ul,
 li {
