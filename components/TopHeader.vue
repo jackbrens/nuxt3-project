@@ -19,7 +19,9 @@
 				<nav class="main-nav">
 					<ul class="nav-list">
 						<ul class="isResourceVisible">
-							<li v-for="nav in navList" :key="nav.id" class="nav-item">{{ nav.label }}</li>
+							<li v-for="nav in navList" :key="nav.id" class="nav-item">
+								<a :href="nav.path">{{ nav.label }}</a>
+							</li>
 						</ul>
 						<ClientOnly>
 							<ul class="right-side-nav">
@@ -120,7 +122,7 @@
 								</li>
 								<li class="nav-item menu">
 									<div v-show="!useGlobalStore.getUserInfo" class="login-button-wrapper">
-										<button class="login-button" @click="openDialog()">登录 | 注册</button>
+										<button class="login-button">不给登录</button>
 										<ClientOnly>
 											<el-dialog
 												v-model="visible"
@@ -199,10 +201,12 @@ const navList = [
 	{
 		id: 1,
 		label: '首页',
+		path: '/',
 	},
 	{
 		id: 2,
 		label: '沸点',
+		path: '/pins/news',
 	},
 	{
 		id: 3,
@@ -242,10 +246,10 @@ const rules = reactive<FormRules>({
 })
 
 // 打开登录对话框
-const openDialog = () => {
-	visible.value = true
-	resetForm(ruleFormRef.value)
-}
+// const openDialog = () => {
+// 	visible.value = true
+// 	resetForm(ruleFormRef.value)
+// }
 
 // 提交表单
 const submitForm = async (formEl: FormInstance | undefined) => {
@@ -268,10 +272,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 }
 
 // 重置表单
-const resetForm = (formEl: FormInstance | undefined) => {
-	if (!formEl) return
-	formEl.resetFields()
-}
+// const resetForm = (formEl: FormInstance | undefined) => {
+// 	if (!formEl) return
+// 	formEl.resetFields()
+// }
 
 // 退出登录
 const logout = () => {
@@ -345,7 +349,6 @@ const changeThemePriamry = (val: string) => {
 				.isResourceVisible {
 					display: flex;
 					.nav-item {
-						padding: 0 12px;
 						font-size: 14px;
 						display: flex;
 						justify-content: center;
@@ -354,6 +357,12 @@ const changeThemePriamry = (val: string) => {
 						position: relative;
 						&:hover {
 							color: var(--primary-color);
+						}
+						a {
+							display: inline-block;
+							height: 5rem;
+							padding: 0 1rem;
+							line-height: 5rem;
 						}
 					}
 				}

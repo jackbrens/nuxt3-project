@@ -18,16 +18,16 @@ export interface HttpResponse<T> {
 
 // 文章类型
 export interface Category {
-	back_ground: string
-	category_id: string
-	category_name: string
-	category_url: string
-	ctime: number
-	icon: string
-	item_type: number
-	mtime: number
-	promote_priority: number
-	promote_tag_cap: number
-	rank: number
-	show_type: number
+	back_ground?: string
+	category_id?: string
+	category_name?: string
+	category_url?: string
+	ctime?: number
+	icon?: string
+	item_type?: number
+	mtime?: number
+	promote_priority?: number
+	promote_tag_cap?: number
+	rank?: number
+	show_type?: number
 }

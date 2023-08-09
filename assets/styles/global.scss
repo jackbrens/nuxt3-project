@@ -17,6 +17,8 @@ $rootValue: 12;
 	--border-line-color: #9797971a; // 边框颜色
 	--juejin-gray-3: #f7f8fa;
 	--juejin-brand-5-light: #eaf2ff;
+	--juejin-font-3: #8a919f;
+	--juejin-gray-1-2: rgba(228, 230, 235, 0.5);
 }
 
 #themeConfig.dark {
@@ -33,6 +35,8 @@ $rootValue: 12;
 	--border-line-color: #9797971a;
 	--juejin-gray-3: #f7f8fa;
 	--juejin-brand-5-light: #eaf2ff;
+	--juejin-font-3: #8a919f;
+	--juejin-gray-1-2: rgba(228, 230, 235, 0.5);
 }
 
 @mixin text-overflow($number: 1) {

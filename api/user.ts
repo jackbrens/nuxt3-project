@@ -80,6 +80,49 @@ export const getCategoryBriefs = (): Promise<any> => {
 	})
 }
 
+// 获取沸点分类
+export const getPinsBriefs = (): Promise<any> => {
+	return new Promise((resolve, reject) => {
+		useFetch('https://api.juejin.cn/tag_api/v1/query_category_briefs', {
+			method: 'get',
+		})
+			.then(({ data, error }) => {
+				if (error.value) {
+					reject(error.value)
+					return
+				}
+				resolve(data.value)
+			})
+			.catch((err: ErrorEvent) => {
+				reject(err)
+			})
+	})
+}
+
+export const getShortMsg = (tag: string, sort_type: number): Promise<any> => {
+	return new Promise((resolve, reject) => {
+		useFetch(`https://api.juejin.cn/recommend_api/v1/short_msg/${tag}`, {
+			method: 'post',
+			body: {
+				cursor: '0',
+				id_type: 4,
+				limit: 20,
+				sort_type,
+			},
+		})
+			.then(({ data, error }) => {
+				if (error.value) {
+					reject(error.value)
+					return
+				}
+				resolve(data.value)
+			})
+			.catch((err: ErrorEvent) => {
+				reject(err)
+			})
+	})
+}
+
 /**
  * 登录接口
  * @param {Login.ReqLoginForm} data - 用户账号和密码
