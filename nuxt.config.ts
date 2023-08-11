@@ -3,6 +3,7 @@ import { resolve } from 'pathe'
 import { loadEnv } from 'vite'
 
 export default defineNuxtConfig({
+	devtools: { enabled: true },
 	app: {
 		head: {
 			meta: [{ name: 'referrer', content: 'no-referrer' }],
